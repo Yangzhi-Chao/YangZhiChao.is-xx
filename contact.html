@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        
+    </style>
+    <meta charset="UTF8">
+    <title>我亲手写的第一个网页</title>
+</head>
+<style>
+    body {                  /* 整个网页的整体设置 */
+    text-align: center; /* 页面里所有内容默认居中显示 */
+    background: #f5f5f5;/* 页面背景色：浅灰色 */
+    color: #333;        /* 整个页面默认文字颜色：深灰色 */
+}
+  /*改图片的颜色大小属性*/
+  img {                     /* 所有图片的样式 */
+    width: 200px;         /* 图片宽度固定200像素 */
+    margin: 10px;         /* 图片四周留出10像素空白，不贴在一起 */
+    cursor: pointer;      /* 鼠标放到图片上，变成小手形状 */
+    border-radius: 20px;  /* 图片四个角变圆，圆角20像素 */
+    box-shadow: 0 9px 8px rgba(0, 0, 225, 0.15);  /* 图片加蓝色阴影，更立体 */
+}
+  /* 新加的：鼠标放上去放大 */
+img:hover {          /* 鼠标放到图片上时 */
+  transform: scale(1.08); /* 图片放大 1.08 倍 */
+  transition: 0.2s;       /* 放大动画 0.2 秒完成，变得顺滑不突兀 */
+}
+/*自插图片*/
+  .tupian {
+    width: 200px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius:0px;
+   }
+   /*大标题*/
+   .header {            /* 页面头部 / 标题区域 */
+  text-align: center;/* 文字居中 */
+  padding: 20px;     /* 内部上下左右留白 20px */
+  background: #fff;  /* 背景白色 */
+  margin-bottom: 20px;/* 下方留出 20px 空白，和下面内容隔开 */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);/* 底部淡淡的阴影，更立体好看 */
+}
+/*页底*/
+.footer {            /* 网页底部（页脚） */
+  text-align: center;/* 文字居中 */
+  padding: 15px;     /* 内部四边留白 15px */
+  margin-top: 30px;  /* 上方空出 30px，和上面内容隔开 */
+  color: #666;       /* 文字颜色：灰色 */
+  font-size: 14px;   /* 字体大小 14 像素（偏小一点） */
+}
+/*导航栏*/
+.nav {                     /* 导航栏的整体样式 */
+  text-align: center;      /* 文字居中显示 */
+  margin: 20px 0;          /* 上下留出20px空白，左右不留 */
+  background: #3462f8;     /* 背景颜色：蓝色 */
+  padding: 12px;           /* 内部四边都留出12px空白（文字不贴边） */
+  border-radius: 30px;     /* 圆角30px，让导航变成椭圆圆角 */
+}
+.nav a {                /* 导航栏里面的文字链接（首页、产品...） */
+  margin: 0 12px;       /* 上下没有间距，左右各空出12px（让文字分开） */
+  font-size: 16px;      /* 字体大小16像素 */
+  color: #333;          /* 文字颜色：深灰色 */
+  text-decoration: none;/* 去掉链接默认的下划线 */
+}
+.nav a:hover {         /* 鼠标放到导航文字上时 */
+  color: red;          /* 文字颜色变成红色 */
+  font-weight: bold;   /* 文字变成加粗 */
+}
+
+</style>
+<body>
+    <div class="header">
+  <h1>联系我们</h1><!--联系我们大标题-->
+  <!--导航栏-->
+  <div class="nav">
+  <a href="index.html">首页</a><!--(首页、产品...)就是导航栏里面的文字链接-->
+  <a href="product.html">产品</a>
+  <a href="contact.html">联系我们</a>
+  <a href="message.html">留言板</a>
+</div>
+<div style="text-align:center; margin:40px 0; font-size:18px;"><!--联系我们-->
+  <p>电话：138xxxx1234</p>
+  <p>微信：your_wechat_id</p>
+  <p>地址：云南省广南县珠琳镇</p>
+</div>
+</div>
+
+<img src="1.jpeg" class="tupian" onclick="openImage(this.src)">
+    <img src="3.jpeg" onclick="openImage(this.src)">
+    <img src="5.jpeg" onclick="openImage(this.src)">
+    <img src="6.jpeg" onclick="openImage(this.src)">
+    <img src="7.jpeg" onclick="openImage(this.src)">
+    <img src="9.jpg" onclick="openImage(this.src)">
+    <img src="10.jpg" class="tupian" onclick="openImage(this.src)">
+
+    <script>
+// 点击图片放大查看
+function openImage(src) {
+  let lightbox = document.createElement("div");
+  lightbox.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;display:flex;justify-content:center;align-items:center;";
+  lightbox.onclick = function(){ lightbox.remove() };
+
+  let img = document.createElement("img");
+  img.src = src;
+  img.style.cssText = "width:auto;height:100vh;object-fit:contain;";
+
+  lightbox.appendChild(img);
+  document.body.appendChild(lightbox);
+}
+</script>
+<div class="footer">
+  © 2026 我的产品展示 - 保留所有权利
+</div>
+</body>
+</html>
