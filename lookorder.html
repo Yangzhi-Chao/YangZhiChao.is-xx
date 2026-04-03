@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF8">
+  <title>订单管理</title>
+  <style>
+    body { /*美化统一风格*/                        /* 网页整体样式开始 */
+  text-align: center;          /* 文字居中 */
+  background: #f5f5f5;        /* 背景浅灰色 */
+  color: #333;                /* 文字深灰色 */
+  font-family: "Microsoft YaHei", sans-serif;  /* 字体用微软雅黑 */
+}
+    #list {                         /* 订单列表区域样式开始 */
+  max-width: 600px;             /* 最大宽度600像素，不会太宽 */
+  margin: 0 auto;               /* 上下无间距，左右自动居中 */
+  text-align: left;             /* 文字靠左显示（不居中） */
+} 
+    .order-item {                   /* 订单卡片样式开始 */
+  background: white;            /* 背景白色 */
+  padding: 15px;                /* 内边距15px，内容不贴边 */
+  margin: 10px 0;              /* 上下间距10px，左右无间距 */
+  border-radius: 12px;          /* 圆角12px，边角变圆 */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);  /* 轻微阴影，有立体感 */
+} 
+    #totalPrice {                   /* 总价格样式 */
+  font-size: 20px;              /* 文字大小20像素 */
+  font-weight: bold;            /* 文字加粗 */
+  color: red;                   /* 文字颜色红色 */
+  margin: 20px 0;               /* 上下外边距20像素，左右0 */
+} 
+    button {                         /* 所有按钮样式 */
+  padding: 8px 16px;              /* 内边距 上下8px 左右16px */
+  background: red;                /* 背景红色 */
+  color: white;                   /* 文字白色 */
+  border: none;                   /* 去掉边框 */
+  border-radius: 6px;             /* 圆角6px */
+  cursor: pointer;                /* 鼠标放上去变成小手 */
+  margin: 5px;                    /* 外边距5px */
+} 
+  </style>
+</head>
+<body>
+  <div class="nav" style="text-align:center; margin:20px 0; background:#3462f8; padding:12px; border-radius:30px;"><!--统一导航-->
+  <a href="index.html" style="margin:0 12px; color:#fff; text-decoration:none;">首页</a>
+  <a href="product.html" style="margin:0 12px; color:#fff; text-decoration:none;">产品</a>
+  <a href="contact.html" style="margin:0 12px; color:#fff; text-decoration:none;">联系我们</a>
+  <a href="message.html" style="margin:0 12px; color:#fff; text-decoration:none;">留言板</a>
+</div>
+  <h1>订单</h1><!--订单网页-->
+  <button onclick="clearOrders()" style="padding:8px 16px; background:red; color:white; border:none; border-radius:5px; cursor:pointer;">清空所有订单</button><!--正在购买删除--><!--p内边距 /b背景 /c颜色 /b边框 /r圆角 /c鼠标指针 /p小手.指针-->
+  <div id="list"></div>
+  <p id="totalPrice" style="font-size:20px; font-weight:bold; margin-top:20px;"></p><!--总价统计--><!--t总共 /p价格 /f字体 /w粗细 /b加粗 /m外边距 /t上方-->
+
+<script>
+let orders = JSON.parse(localStorage.getItem("orders")) || [];//<!--订单弹窗-->
+let list = document.getElementById("list");
+
+//order卡片样式
+orders.forEach(o=>{
+  list.innerHTML += `
+<div class="order-item">
+  <p>产品：${o.product}</p>
+  <p>价格：¥${o.price}.00</p>
+  <p>数量：${o.count} 件</p>
+  <p>小计：¥${(o.price * o.count).toFixed(2)}</p>
+  <p>姓名：${o.name}</p>
+  <p>电话：${o.phone}</p>
+  <p>地址：${o.address}</p>
+  <p>时间：${o.time}</p>
+</div>
+`;
+})
+// 计算总价
+let total = 0;//t总数.总价 /0数字0
+orders.forEach(o => {//o订单列表 /f对于 /E每一个(fE遍历每一个)  0每个订单.简写 /=箭头函数.执行操作
+  total += o.price * o.count; // 按数量计算总价。  总价 /+累加 /0当前订单 /p价格 /*乘 /1数字1 
+});
+// 把总价显示到页面
+document.getElementById('totalPrice').textContent = `订单总金额：¥${total.toFixed(2)}`;//t文字 /C内容 /总价 /t转为 /f固定 /2两个小数
+function clearOrders() {//就一个{}删除订单记录 //c清空订单
+  if(confirm("确定要清空所有订单吗？ 此操作不可恢复！")) {//c弹出确认框
+    localStorage.removeItem("orders"); //l本地存储 /r删除数据 /o订单数据
+    location.reload();//当前页面地址 /重新加载.刷新页面
+  }
+}
+</script>
+</body>
+</html>

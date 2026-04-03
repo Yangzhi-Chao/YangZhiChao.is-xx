@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        
+    </style>
+    <meta charset="UTF8">
+    <title>产品详情</title>
+</head>
+<style>
+  /*调改页面文字大小和背景颜色*/
+    body {
+    text-align: center;
+    background: #f5f5f5;
+     color: #333; /* ✅ 改这一行，所有文字一起变深灰 */
+  }
+  /*改图片的颜色大小属性*/
+  img {
+    width: 200px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 0 9px 8px rgba(0, 0, 225, 0.15); /* ✅ 只加这一行！ */
+  }
+  /* 新加的：鼠标放上去放大 */
+img:hover {
+  transform: scale(1.08);
+  transition: 0.2s;
+}
+/*自插图片打组*/
+  .tupian {
+    width: 200px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius:0px;
+   }
+   /*大标题*/
+   .header {
+  text-align: center;
+  padding: 20px;
+  background: #fff;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+/*页底*/
+.footer {
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+  color: #666;
+  font-size: 14px;
+}
+/*导航栏*/
+.nav {
+ text-align: center;
+  margin: 20px 0;
+  background: #3462f8;
+  padding: 12px;
+  border-radius: 30px;
+}
+.nav a {
+  margin: 0 12px;
+  font-size: 16px;
+  color: #333;
+  text-decoration: none;
+}
+.nav a:hover {
+  color: red;
+  font-weight: bold;
+}
+/*调改商品卡片信息*/
+.product-item {                      /* 商品卡片盒子 */
+  background: #fff;                  /* 背景白色 */
+  padding: 20px;                     /* 内部留白20px，内容不贴边 */
+  margin: 20px;                      /* 卡片四周间距20px，互不拥挤 */
+  max-width: 300px;                  /* 卡片最大宽度300px */
+  border-radius: 15px;                /* 圆角15px，美观 */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);  /* 卡片阴影，立体效果 */
+  display: inline-block;             /* 让卡片并排显示，不独占一行 */
+  vertical-align: top;               /* 所有卡片顶部对齐 */
+  height: 550px;                     /* 统一卡片高度，避免高低不齐 */
+}
+.product-item img {        /* 商品卡片里面的图片 */
+  width: 100%;             /* 图片宽度占满整个卡片，自动适配 */
+  border-radius: 10px;     /* 图片圆角10px，和卡片风格统一 */
+}
+.price {                  /* 价格文字样式 */
+  font-size: 20px;        /* 字体大小 20 像素（显眼） */
+  color: red;             /* 颜色：红色 */
+  font-weight: bold;      /* 文字加粗 */
+  margin: 10px 0;         /* 上下各留出 10px 空白，和其他内容隔开 */
+}
+.buy-btn {                /* 购买按钮样式 */
+  background: red;        /* 背景色：红色 */
+  color: #fff;            /* 文字颜色：白色 */
+  padding: 10px 25px;     /* 按钮内部上下10px、左右25px空白（让按钮变大） */
+  border-radius: 30px;    /* 按钮圆角30px，变成椭圆好看 */
+  border: none;           /* 去掉默认边框 */
+  font-size: 16px;        /* 字体大小16像素 */
+  cursor: pointer;        /* 鼠标放上去变成小手 */
+}
+/*加商品排行*/
+.product-list {
+  text-align: center; /* 让里面所有的商品卡片，整组在页面中间显示 */
+}
+/*商品卡片点击事件*/
+.modal {
+  display: none;          /* 一开始隐藏 */
+  position: fixed;        /* 固定在屏幕上 */
+  top: 0;                 /* 贴到顶部 */
+  left: 0;                /* 贴到左边 */
+  width: 100%;            /* 宽度铺满全屏 */
+  height: 100%;           /* 高度铺满全屏 */
+  background: rgba(0,0,0,0.5); /* 半透明黑色背景 */
+  z-index: 9999;          /* 放在最上层，不被挡住 */
+}
+.modal-content {
+  background: #fff;           /* 背景：白色 */
+  width: 300px;               /* 宽度：300像素 */
+  padding: 30px;              /* 内边距：30像素 */
+  border-radius: 15px;        /* 边框圆角：15像素 */
+  text-align: center;         /* 文字对齐：居中 */
+  position: absolute;         /* 定位方式：绝对定位 */
+  top: 50%;                   /* 距离顶部：50% */
+  left: 50%;                  /* 距离左侧：50% */
+  transform: translate(-50%, -50%);  /* 位移：向左向上各回退50%，实现真正居中 */
+}
+.close-btn {
+  background: red;           /* 背景：红色 */
+  color: #fff;               /* 文字颜色：白色 */
+  border: none;              /* 边框：无 */
+  padding: 10px 25px;        /* 内边距：上下10px 左右25px */
+  border-radius: 30px;       /* 边框圆角：30px（椭圆圆角） */
+  margin-top: 20px;          /* 距离顶部外边距：20px */
+  cursor: pointer;           /* 鼠标悬浮：变成小手样式 */
+}
+</style>
+<body>
+    <div class="header"><!--产品详情的大盒子包到第二个/div-->
+  <h1>产品详情</h1>
+  <div class="nav"> <!--导航栏-->
+  <a href="index.html">首页</a>
+  <a href="product.html">产品</a>
+  <a href="contact.html">联系我们</a>
+  <a href="message.html">留言板</a>
+</div>
+</div>
+<div class="product-list"><!--包裹全部商品图片卡片的大盒子-->
+<div class="product-item"> <!--卡片盒子名字-->
+  <!--商品卡片-->
+  <img src="1.jpeg" onclick="openImage(this.src)"><!--onclick鼠标点击时，执行一段动作/代码。加openImage是给JS起的名字 -->
+  <h3>产品名称11</h3>
+  <div class="price">¥ 99.00</div><!--class="price"给CSS起的名字-->
+  <button class="buy-btn" onclick="showModal('产品名称11',99.00)">立即购买</button><!--class="buy-btn"给CSS起的名字-->
+</div>
+<div class="product-item"><!--class="product-item""给CSS起的名字-->
+  <img src="3.jpeg" onclick="openImage(this.src)">
+  <h3>产品名称22</h3>
+  <div class="price">¥ 99.00</div>
+  <button class="buy-btn" onclick="showModal('产品名称22',99.00)">立即购买</button>
+</div>
+<div class="product-item">
+  <img src="5.jpeg" onclick="openImage(this.src)">
+  <h3>产品名称33</h3>
+  <div class="price">¥ 99.00</div>
+  <button class="buy-btn" onclick="showModal('产品名称33',99.00)">立即购买</button>
+</div><div class="product-item">
+  <img src="9.jpg" onclick="openImage(this.src)">
+  <h3>产品名称44</h3>
+  <div class="price">¥ 99.00</div>
+  <button class="buy-btn" onclick="showModal('产品名称44',99.00)">立即购买</button>
+</div>
+</div><!--产品详情的大盒子包到第二个/div-->
+<!-- 下单弹窗 -->
+<div id="orderModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);" onclick="closeModal()">
+  <div style="background:white; max-width:500px; margin:100px auto; padding:30px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.2); text-align:center;" onclick="event.stopPropagation()"><!--e事件（比如点击.鼠标移动等） /s停止阻止 /PG阻止传播-->
+    <h3>下单</h3>
+    <p id="currentBuyProduct" style="color:red; font-weight:bold;"></p><!--CBP当前购买的商品 /c颜色 /fw文字 /b加粗-->
+    <input type="text" id="buyName" placeholder="请输入姓名" style="width:100%; padding:10px; margin:10px 0;"><br>
+    <input type="text" id="buyPhone" placeholder="请输入电话" style="width:100%; padding:10px; margin:10px 0;"><br>
+    <textarea id="buyAddress" placeholder="请输入收货地址" style="width:100%; padding:10px; margin:10px 0; height:80px;"></textarea><br>
+    <p>购买数量：<input type="number" id="buyCount" value="1" min="1" style="width:60px; padding:5px;"></p><!--总价统计-->
+    <button onclick="submitOrder()" style="margin-right:10px;">确认下单</button>
+    <button onclick="closeModal()">取消</button>
+  </div>
+</div>
+ <!--加 class="tupian" 是给图片打组方便调改CSS样式  加onclick="openImage(this.src)">是点击图片放大-->
+<img src="1.jpeg" class="tupian" onclick="openImage(this.src)">
+    <img src="3.jpeg" onclick="openImage(this.src)"><!--网页图片-->
+    <img src="5.jpeg" onclick="openImage(this.src)">
+    <img src="6.jpeg" onclick="openImage(this.src)">
+    <img src="7.jpeg" onclick="openImage(this.src)">
+    <img src="9.jpg" onclick="openImage(this.src)">
+    <img src="10.jpg" class="tupian" onclick="openImage(this.src)">
+
+    <script>
+// 点击图片放大查看
+function openImage(src) {
+  let lightbox = document.createElement("div");
+  lightbox.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;display:flex;justify-content:center;align-items:center;";
+  lightbox.onclick = function(){ lightbox.remove() };
+
+  let img = document.createElement("img");
+  img.src = src;
+  img.style.cssText = "width:auto;height:100vh;object-fit:contain;";
+
+  lightbox.appendChild(img);
+  document.body.appendChild(lightbox);
+}
+function openModal() {
+  document.getElementById('orderModal').style.display = 'block';
+}
+function closeModal() {
+  document.getElementById('orderModal').style.display = 'none';
+}
+//下单弹窗
+let currentProduct = "";
+let currentPrice = 0;
+
+function showModal(productName, productPrice) {
+  currentProduct = productName;
+  currentPrice = productPrice;
+  // 把产品名显示在弹窗里
+  document.getElementById("currentBuyProduct").textContent = "您正在购买：" + productName + " ¥" + productPrice + ".00";//cbp当前购买商品 /t文字内容 /+连接.拼接 /pN视频名称 /pN商品价格
+  document.getElementById("orderModal").style.display = "block";
+}
+function submitOrder() {
+  let name = document.getElementById("buyName").value.trim();
+  let phone = document.getElementById("buyPhone").value.trim();
+  let address = document.getElementById("buyAddress").value.trim();
+  if (!name || !phone || !address) {
+    alert("请填写完整信息");
+    return;
+  }
+
+  let count = document.getElementById('buyCount').value * 1;
+  let order = {
+    name: name,
+    phone: phone,
+    address: address,
+    product: currentProduct,
+    price: currentPrice,
+    count: count,
+    time: new Date().toLocaleString(),
+    total: (currentPrice * count).toFixed(2)
+  };
+
+  let orders = JSON.parse(localStorage.getItem("orders")) || [];//o订单列表.所有订单 /J把字符串转成数组.对象 /l浏览器本地存储 /获取数据 /名叫orders的数据 /【】空数据
+  orders.push(order);//p添加.放进
+  localStorage.setItem("orders", JSON.stringify(orders));//s保存数据 /J转成可保存的字符串
+
+  // 2. 核心：自动发订单到你的邮箱
+  // 👇 把这里换成你自己的邮箱！QQ/163/Outlook都可以
+  let yourEmail = "1736416201@qq.com";
+  let mailSubject = `【新订单】${order.product} x${order.count} 件`;
+  let mailBody = `
+您收到一个新订单！
+------------------------
+产品名称：${order.product}
+单价：¥${order.price}.00
+购买数量：${order.count} 件
+订单小计：¥${order.total}
+------------------------
+客户信息：
+姓名：${order.name}
+电话：${order.phone}
+收货地址：${order.address}
+下单时间：${order.time}
+  `;
+
+  // 用mailto协议唤起邮件客户端，一键发送
+  window.location.href = `mailto:${yourEmail}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+
+  alert("下单成功！我们会尽快联系您~");
+  closeModal();
+}
+</script>
+<div class="footer">//网页底部
+  © 2026 我的产品展示 - 保留所有权利
+</div>
+</body>
+</html>
